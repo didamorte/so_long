@@ -1,6 +1,6 @@
 NAME	:= so_long
 CC		:= gcc
-FLAGS	:= -Wall -Wextra -Werror -g
+FLAGS	:= -Wall -Wextra -Werror -g -no-pie
 MLX_FLAGS := -Lmlx-linux -lmlx -L/usr/X11/lib -lXext -lX11 -lbsd
 
 # Library Paths - No Spaces Around '='
@@ -11,6 +11,7 @@ MLX_DIR		:= mlx-linux
 
 # Source Files
 SRCS := so_long.c \
+		so_long_utils.c \
 
 OBJS := $(SRCS:.c=.o)
 
@@ -40,7 +41,6 @@ gnl:
 	$(CC) $(FLAGS) -c $(GNL_DIR)/get_next_line_utils.c -o $(GNL_DIR)/get_next_line_utils.o
 
 mlx:
-	$(MAKE) -C $(MLX_DIR) clean
 	$(MAKE) -C $(MLX_DIR)
 
 # Compilation Rule
@@ -57,7 +57,6 @@ clean:
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(PRINTF_DIR) fclean
-	$(MAKE) -C $(MLX_DIR) clean
 	rm -f $(NAME)
 
 re: fclean all
