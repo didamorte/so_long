@@ -6,7 +6,7 @@
 /*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 15:51:12 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/10 17:26:13 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:07:57 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft/libft.h"
 # include "libft/ft_printf/ft_printf.h"
 # include "libft/get_next_line/get_next_line.h"
-# include "mlx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 
 // Size of each tile (square)
 # define TILE_SIZE 50

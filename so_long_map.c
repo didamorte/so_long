@@ -6,7 +6,7 @@
 /*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:20:24 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/10 17:15:39 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:01:15 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ int	is_valid_path(t_game game)
 	return (1);
 }
 
-void	counters(int *E_count, int *P_count, int *C_count, t_game game)
+void	counters(int *e_count, int *p_count, int *c_count, t_game game)
 {
-	int	x; 
+	int	x;
 	int	y;
 
 	y = 0;
@@ -90,11 +90,11 @@ void	counters(int *E_count, int *P_count, int *C_count, t_game game)
 		while (x < game.map_w)
 		{
 			if (game.map[y][x] == 'P')
-				*P_count += 1;
+				*p_count += 1;
 			else if (game.map[y][x] == 'E')
-				*E_count += 1;
+				*e_count += 1;
 			else if (game.map[y][x] == 'C')
-				*C_count += 1;
+				*c_count += 1;
 			x++;
 		}
 		y++;
@@ -103,22 +103,22 @@ void	counters(int *E_count, int *P_count, int *C_count, t_game game)
 
 int	map_valid(t_game *game)
 {
-	int	E_count;
-	int	P_count;
-	int	C_count;
+	int	e_count;
+	int	p_count;
+	int	c_count;
 
-	E_count = 0;
-	P_count = 0;
-	C_count = 0;
+	e_count = 0;
+	p_count = 0;
+	c_count = 0;
 	if (!is_valid_path(*game))
 		return (write(2, "Error\nCaminho invalido\n", 24));
-	counters(&E_count, &P_count, &C_count, *game);
-	if (P_count != 1)
+	counters(&e_count, &p_count, &c_count, *game);
+	if (p_count != 1)
 		return (write(2, "Error\nPlayers a mais\n", 22));
-	if (E_count != 1)
+	if (e_count != 1)
 		return (write(2, "Error\nSaidas a mais\n", 21));
-	if (C_count < 1)
+	if (c_count < 1)
 		return (write(2, "Error\nNenhum colecionavel\n", 27));
-	game->collected = C_count;
+	game->collected = c_count;
 	return (1);
 }

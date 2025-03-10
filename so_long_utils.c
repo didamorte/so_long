@@ -6,7 +6,7 @@
 /*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:08:36 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/07 18:06:45 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/10 19:01:51 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	free_map(char **map, int height)
 	int	i;
 
 	if (!map)
-		return;
+		return ;
 	i = -1;
 	while (++i < height)
 		free(map[i]);

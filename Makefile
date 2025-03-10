@@ -1,13 +1,13 @@
 NAME	:= so_long
 CC		:= cc
 FLAGS	:= -Wall -Wextra -Werror -g -no-pie
-MLX_FLAGS := -Lmlx-linux -lmlx -L/usr/X11/lib -lXext -lX11 -lbsd
+MLX_FLAGS := -Lminilibx-linux -lmlx -L/usr/X11/lib -lXext -lX11 -lbsd
 
 # Library Paths - No Spaces Around '='
 LIBFT_DIR	:= libft
 PRINTF_DIR	:= $(LIBFT_DIR)/ft_printf
 GNL_DIR		:= $(LIBFT_DIR)/get_next_line
-MLX_DIR		:= mlx-linux
+MLX_DIR		:= minilibx-linux
 
 # Source Files
 SRCS := so_long.c \
