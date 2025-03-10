@@ -6,7 +6,7 @@
 /*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:23:31 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/07 17:55:36 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:33:30 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	key_hook(int key, t_game *game)
 
 	old_x = game->pl_x;
 	old_y = game->pl_y;
-	if (key == 65307 || key == 113)
+	if (key == 65307)
 		close_game(game);
 	else if (key_left(key) && is_walkable(*game, game->pl_y, game->pl_x - 1))
 	{
