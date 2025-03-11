@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:08:36 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/10 19:01:51 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/11 18:51:12 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	get_map_height(char *filename)
 	return (height);
 }
 
-// Find player and count collectibles
+// Find player
 void	find_player_position(t_game *game)
 {
 	int	x;
@@ -58,16 +58,17 @@ void	find_player_position(t_game *game)
 }
 
 // Free map
-void	free_map(char **map, int height)
+int	free_map(char **map, int height)
 {
 	int	i;
 
 	if (!map)
-		return ;
+		return (-1);
 	i = -1;
 	while (++i < height)
 		free(map[i]);
 	free(map);
+	return (1);
 }
 
 // Free map, imgs and display

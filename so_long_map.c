@@ -6,7 +6,7 @@
 /*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:20:24 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/11 17:44:13 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/11 19:04:59 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,12 @@ int	is_valid_path(t_game game)
 	int		x;
 	char	**map_copy;
 
+	ft_printf("map_h: %d, map_w: %d\n", game.map_h, game.map_w);
 	map_copy = copy_map(game.map, game.map_w, game.map_h);
 	if (!map_copy)
 		return (0);
+	for (y = 0; y < game.map_h; y++)
+		ft_printf("%s\n", map_copy[y]);
 	flood_fill(map_copy, game.pl_x, game.pl_y, game);
 	y = 0;
 	while (y < game.map_h)

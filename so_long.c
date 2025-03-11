@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:18:00 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/10 17:54:32 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/11 18:34:49 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (1);
-	game.mlx = mlx_init();
 	if (load_map(argv[1], &game))
-		return (1);
+		return (free_map(game.map, game.map_h));
 	find_player_position(&game);
 	if (map_valid(&game) != 1)
-		return (1);
+		return (free_map(game.map, game.map_h));
+	game.mlx = mlx_init();
 	get_img(&game);
 	if (!game.wall || !game.floor || !game.house || !game.pl_r
 		|| !game.pl_l || !game.collect)
@@ -34,6 +34,4 @@ int	main(int argc, char **argv)
 	mlx_key_hook(game.win, key_hook, &game);
 	mlx_hook(game.win, 17, 0, close_game, &game);
 	mlx_loop(game.mlx);
-	close_game(&game);
-	return (0);
 }
