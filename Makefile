@@ -1,6 +1,6 @@
 NAME	:= so_long
 CC		:= cc
-FLAGS	:= -Wall -Wextra -Werror -g -no-pie
+FLAGS	:= -Wall -Wextra -Werror -g
 MLX_FLAGS := -Lminilibx-linux -lmlx -L/usr/X11/lib -lXext -lX11 -lbsd
 
 # Library Paths - No Spaces Around '='

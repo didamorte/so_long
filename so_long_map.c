@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:20:24 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/10 19:01:15 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:44:13 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,27 @@ int	is_valid_path(t_game game)
 	return (1);
 }
 
-void	counters(int *e_count, int *p_count, int *c_count, t_game game)
+void	counters(int *e_count, int *p_count, int *c_count, t_game *game)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	while (y < game.map_h)
+	while (y < game->map_h)
 	{
 		x = 0;
-		while (x < game.map_w)
+		while (x < game->map_w)
 		{
-			if (game.map[y][x] == 'P')
+			if (game->map[y][x] == 'P')
 				*p_count += 1;
-			else if (game.map[y][x] == 'E')
+			else if (game->map[y][x] == 'E')
 				*e_count += 1;
-			else if (game.map[y][x] == 'C')
+			else if (game->map[y][x] == 'C')
 				*c_count += 1;
+			if (game->map[0][x] != '1' || game->map[y][0] != '1'
+				|| game->map[game->map_h - 1][x] != '1'
+				|| game->map[y][game->map_w - 1] != '1')
+				game->validWalls = 0;
 			x++;
 		}
 		y++;
@@ -110,15 +114,18 @@ int	map_valid(t_game *game)
 	e_count = 0;
 	p_count = 0;
 	c_count = 0;
+	game->validWalls = 1;
 	if (!is_valid_path(*game))
 		return (write(2, "Error\nCaminho invalido\n", 24));
-	counters(&e_count, &p_count, &c_count, *game);
+	counters(&e_count, &p_count, &c_count, game);
 	if (p_count != 1)
 		return (write(2, "Error\nPlayers a mais\n", 22));
 	if (e_count != 1)
 		return (write(2, "Error\nSaidas a mais\n", 21));
 	if (c_count < 1)
 		return (write(2, "Error\nNenhum colecionavel\n", 27));
+	if (game->validWalls == 0)
+		return (write(2, "Error\nMapa nao rodeado\n", 24));
 	game->collected = c_count;
 	return (1);
 }
