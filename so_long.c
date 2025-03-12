@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:18:00 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/11 18:34:49 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:44:31 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (1);
 	if (load_map(argv[1], &game))
-		return (free_map(game.map, game.map_h));
+		return (1);
 	find_player_position(&game);
 	if (map_valid(&game) != 1)
 		return (free_map(game.map, game.map_h));

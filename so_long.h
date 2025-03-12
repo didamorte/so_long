@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 15:51:12 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/11 18:33:03 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/12 17:53:24 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_game
 	int		map_h;
 	char	**map;
 	int		collected;
-	int		validWalls;
+	int		valid_walls;
 }				t_game;
 
 /* Utils */
