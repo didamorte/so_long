@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:08:36 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/12 17:36:45 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:59:22 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,25 @@ int	free_map(char **map, int height)
 int	close_game(t_game *game)
 {
 	free_map(game->map, game->map_h);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_image(game->mlx, game->floor);
-	mlx_destroy_image(game->mlx, game->house);
-	mlx_destroy_image(game->mlx, game->wall);
-	mlx_destroy_image(game->mlx, game->pl_l);
-	mlx_destroy_image(game->mlx, game->pl_r);
-	mlx_destroy_image(game->mlx, game->collect);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->floor)
+		mlx_destroy_image(game->mlx, game->floor);
+	if (game->house)
+		mlx_destroy_image(game->mlx, game->house);
+	if (game->wall)
+		mlx_destroy_image(game->mlx, game->wall);
+	if (game->pl_l)
+		mlx_destroy_image(game->mlx, game->pl_l);
+	if (game->pl_r)
+		mlx_destroy_image(game->mlx, game->pl_r);
+	if (game->collect)
+		mlx_destroy_image(game->mlx, game->collect);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
 	exit (0);
 	return (0);
 }

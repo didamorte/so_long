@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_fts.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:23:31 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/12 17:39:12 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:11:26 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	load_map(char *filename, t_game *game)
 		while (game->map[y][game->map_w] && game->map[y][game->map_w] != '\n')
 			game->map_w++;
 	}
-	get_next_line(-1);
 	game->map[y] = NULL;
 	return (close(fd));
 }
@@ -132,16 +131,22 @@ void	get_img(t_game *game)
 {
 	game->win = mlx_new_window(game->mlx, game->map_w * TILE_SIZE,
 			game->map_h * TILE_SIZE, "so_long");
-	game->wall = mlx_xpm_file_to_image(game->mlx, "textures/Wall.xpm",
+	if ("textures/Wall.xpm")
+		game->wall = mlx_xpm_file_to_image(game->mlx, "textures/Wall.xpm",
 			&game->img_w, &game->img_h);
-	game->floor = mlx_xpm_file_to_image(game->mlx, "textures/Floor.xpm",
+	if ("textures/Floor.xpm")
+		game->floor = mlx_xpm_file_to_image(game->mlx, "textures/Floor.xpm",
 			&game->img_w, &game->img_h);
-	game->house = mlx_xpm_file_to_image(game->mlx, "textures/House.xpm",
+	if ("textures/House.xpm")
+		game->house = mlx_xpm_file_to_image(game->mlx, "textures/House.xpm",
 			&game->img_w, &game->img_h);
-	game->pl_r = mlx_xpm_file_to_image(game->mlx, "textures/Player_right.xpm",
+	if ("textures/Player_R.xpm")
+		game->pl_r = mlx_xpm_file_to_image(game->mlx, "textures/Player_R.xpm",
 			&game->img_w, &game->img_h);
-	game->pl_l = mlx_xpm_file_to_image(game->mlx, "textures/Player_left.xpm",
+	if ("textures/Player_L.xpm")
+		game->pl_l = mlx_xpm_file_to_image(game->mlx, "textures/Player_L.xpm",
 			&game->img_w, &game->img_h);
-	game->collect = mlx_xpm_file_to_image(game->mlx, "textures/Egg.xpm",
+	if ("textures/Egg.xpm")
+		game->collect = mlx_xpm_file_to_image(game->mlx, "textures/Egg.xpm",
 			&game->img_w, &game->img_h);
 }
