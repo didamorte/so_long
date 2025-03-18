@@ -6,52 +6,23 @@
 /*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:18:00 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/17 16:53:34 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:14:58 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	unknown_caracter(t_game game)
-{
-	int	x;
-	int	y;
-	int	len;
-	int	j;
-
-	y = 0;
-	len = ft_strlen(game.map[y]);
-	while (y < game.map_h)
-	{
-		x = 0;
-		while (x < game.map_w)
-		{
-			if (game.map[y][x] != 'P' && game.map[y][x] != 'C'
-				&& game.map[y][x] != 'E' && game.map[y][x] != '1'
-				&& game.map[y][x] != '0')
-				return (1);
-			x++;
-		}
-		j = ft_strlen(game.map[y]);
-		if (len != j && game.map[y][x] != '\0')
-			return (1);
-		y++;
-	}
-	return (0);
-}
-
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	t_game	game;
 
-	if (argc != 2)
+	if (ac != 2 || !is_ber_file(av[1]))
 		return (1);
-	if (load_map(argv[1], &game))
-		return (ft_printf("Error\nImpossivel carregar mapa"),
+	if (load_map(av[1], &game))
+		return (ft_printf("Error\nCan't load map\n"),
 			free_map(game.map, game.map_h));
 	if (unknown_caracter(game))
-		return (ft_printf("Error\nCaracteres errados no mapa\n"),
-			free_map(game.map, game.map_h));
+		return (free_map(game.map, game.map_h));
 	find_player_position(&game);
 	if (map_valid(&game) != 1)
 		return (free_map(game.map, game.map_h));

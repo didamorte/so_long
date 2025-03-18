@@ -6,39 +6,11 @@
 /*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:23:31 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/17 16:11:26 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:22:12 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	load_map(char *filename, t_game *game)
-{
-	int	fd;
-	int	y;
-
-	game->map_h = get_map_height(filename);
-	if (game->map_h <= 0)
-		return (1);
-	game->map = malloc(sizeof(char *) * (game->map_h + 1));
-	if (!game->map)
-		return (1);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	y = -1;
-	while (++y < game->map_h)
-	{
-		game->map[y] = get_next_line(fd);
-		if (!game->map[y])
-			break ;
-		game->map_w = 0;
-		while (game->map[y][game->map_w] && game->map[y][game->map_w] != '\n')
-			game->map_w++;
-	}
-	game->map[y] = NULL;
-	return (close(fd));
-}
 
 void	draw_map(t_game *game)
 {
@@ -87,13 +59,13 @@ void	update_player_position(t_game *game, int old_x, int old_y, int direct)
 	{
 		game->map[game->pl_y][game->pl_x] = '0';
 		if (--game->collected > 0)
-			ft_printf("Ovos restantes: %d\n", game->collected);
+			ft_printf("Eggs left: %d\n", game->collected);
 		else
-			ft_printf("Apanhas-te os ovos todos!\nAgora volta pra casa.\n");
+			ft_printf("You got all the eggs!\nNow go back home.\n");
 	}
 	if (game->map[game->pl_y][game->pl_x] == 'E' && game->collected == 0)
 	{
-		ft_printf("Parabéns! Voltas-te para casa em segurança!\n");
+		ft_printf("Congratulations! You're back home safely!\n");
 		close_game(game);
 	}
 }
@@ -133,20 +105,20 @@ void	get_img(t_game *game)
 			game->map_h * TILE_SIZE, "so_long");
 	if ("textures/Wall.xpm")
 		game->wall = mlx_xpm_file_to_image(game->mlx, "textures/Wall.xpm",
-			&game->img_w, &game->img_h);
+				&game->img_w, &game->img_h);
 	if ("textures/Floor.xpm")
 		game->floor = mlx_xpm_file_to_image(game->mlx, "textures/Floor.xpm",
-			&game->img_w, &game->img_h);
+				&game->img_w, &game->img_h);
 	if ("textures/House.xpm")
 		game->house = mlx_xpm_file_to_image(game->mlx, "textures/House.xpm",
-			&game->img_w, &game->img_h);
+				&game->img_w, &game->img_h);
 	if ("textures/Player_R.xpm")
 		game->pl_r = mlx_xpm_file_to_image(game->mlx, "textures/Player_R.xpm",
-			&game->img_w, &game->img_h);
+				&game->img_w, &game->img_h);
 	if ("textures/Player_L.xpm")
 		game->pl_l = mlx_xpm_file_to_image(game->mlx, "textures/Player_L.xpm",
-			&game->img_w, &game->img_h);
+				&game->img_w, &game->img_h);
 	if ("textures/Egg.xpm")
 		game->collect = mlx_xpm_file_to_image(game->mlx, "textures/Egg.xpm",
-			&game->img_w, &game->img_h);
+				&game->img_w, &game->img_h);
 }

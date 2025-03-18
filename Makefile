@@ -14,7 +14,8 @@ SRCS := so_long.c \
 		so_long_utils.c \
 		so_long_fts.c \
 		so_long_keys.c \
-		so_long_map.c
+		so_long_map.c \
+		so_long_map_utils.c
 
 OBJS := $(SRCS:.c=.o)
 

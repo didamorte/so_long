@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 15:51:12 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/12 17:53:24 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:20:28 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ int		key_right(int keycode);
 
 /* Map */
 
+void	flood_fill(char **map, int x, int y, t_game game);
+char	**copy_map(char **map, int width, int height);
+int		is_ber_file(char *filename);
+int		unknown_caracter(t_game game);
 int		map_valid(t_game *game);
 
 #endif

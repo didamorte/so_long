@@ -6,7 +6,7 @@
 /*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:08:36 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/17 15:59:22 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:30:57 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	free_map(char **map, int height)
 {
 	int	i;
 
-	if (!map)
+	if (height < 3 || !map)
 		return (1);
 	i = -1;
 	while (++i < height)
@@ -104,7 +104,8 @@ int	is_walkable(t_game game, int y, int x)
 		return (0);
 	if (game.map[y][x] == 'E' && game.collected != 0)
 	{
-		ft_printf("Volta! Ainda faltam %d ovos\n", game.collected);
+		ft_printf("Go back! There are eggs still missing\n"
+				, game.collected);
 		return (0);
 	}
 	return (1);

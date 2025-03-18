@@ -6,47 +6,67 @@
 /*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:20:24 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/17 16:10:20 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:25:48 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	flood_fill(char **map, int x, int y, t_game game)
+int	load_map(char *filename, t_game *game)
 {
-	if (x < 0 || y < 0 || x >= game.map_w || y >= game.map_h)
-		return ;
-	if (map[y][x] == '1' || map[y][x] == 'F')
-		return ;
-	map[y][x] = 'F';
-	flood_fill(map, x + 1, y, game);
-	flood_fill(map, x - 1, y, game);
-	flood_fill(map, x, y + 1, game);
-	flood_fill(map, x, y - 1, game);
+	int	fd;
+	int	y;
+
+	game->map_h = get_map_height(filename);
+	if (game->map_h <= 0)
+		return (1);
+	game->map = malloc(sizeof(char *) * (game->map_h + 1));
+	if (!game->map)
+		return (1);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	y = -1;
+	while (++y < game->map_h)
+	{
+		game->map[y] = get_next_line(fd);
+		if (!game->map[y])
+			break ;
+		game->map_w = 0;
+		while (game->map[y][game->map_w] && game->map[y][game->map_w] != '\n')
+			game->map_w++;
+	}
+	get_next_line(-1);
+	game->map[y] = NULL;
+	return (close(fd));
 }
 
-char	**copy_map(char **map, int width, int height)
+int	unknown_caracter(t_game game)
 {
-	int		y;
-	char	**new_map;
+	int	x;
+	int	y;
+	int	len;
+	int	j;
 
 	y = 0;
-	new_map = malloc(sizeof(char *) * (height + 1));
-	if (!new_map)
-		return (NULL);
-	while (y < height)
+	len = ft_strlen(game.map[y]);
+	while (y < game.map_h)
 	{
-		new_map[y] = malloc(sizeof(char) * (width + 1));
-		if (!new_map[y])
+		x = 0;
+		while (x < game.map_w)
 		{
-			free_map(new_map, y);
-			return (NULL);
+			if (game.map[y][x] != 'P' && game.map[y][x] != 'C'
+				&& game.map[y][x] != 'E' && game.map[y][x] != '1'
+				&& game.map[y][x] != '0')
+				return (ft_printf("Error\nInvalid characters\n"), 1);
+			x++;
 		}
-		ft_strlcpy(new_map[y], map[y], width + 1);
+		j = ft_strlen(game.map[y]);
+		if (len != j && game.map[y][x] != '\0')
+			return (ft_printf("Error\nMap not rectangular\n"), 1);
 		y++;
 	}
-	new_map[height] = NULL;
-	return (new_map);
+	return (0);
 }
 
 int	is_valid_path(t_game game)
@@ -116,16 +136,16 @@ int	map_valid(t_game *game)
 	c_count = 0;
 	game->valid_walls = 1;
 	if (!is_valid_path(*game))
-		return (write(2, "Error\nCaminho invalido\n", 24));
+		return (write(2, "Error\nInvalid path\n", 19));
 	counters(&e_count, &p_count, &c_count, game);
 	if (p_count != 1)
-		return (write(2, "Error\nPlayers a mais\n", 22));
+		return (write(2, "Error\nMore than 1 player\n", 25));
 	if (e_count != 1)
-		return (write(2, "Error\nSaidas a mais\n", 21));
+		return (write(2, "Error\nMore than 1 exit\n", 23));
 	if (c_count < 1)
-		return (write(2, "Error\nNenhum colecionavel\n", 27));
+		return (write(2, "Error\nNo collectibles found\n", 28));
 	if (game->valid_walls == 0)
-		return (write(2, "Error\nMapa nao rodeado\n", 24));
+		return (write(2, "Error\nMap is not closed\n", 24));
 	game->collected = c_count;
 	return (1);
 }
