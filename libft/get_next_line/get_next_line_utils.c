@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:43:32 by diogribe          #+#    #+#             */
-/*   Updated: 2024/12/19 17:28:08 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:37:34 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (tmp);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	gnl_ft_strlen(const char *s)
 {
 	int	i;
 
@@ -70,8 +70,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if ((!s1 && !s2) || !s1 || !s2)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
+	len1 = gnl_ft_strlen(s1);
+	len2 = gnl_ft_strlen(s2);
 	str = (char *)malloc((len1 + len2 + 1) * sizeof(char));
 	if (!str)
 		return (NULL);

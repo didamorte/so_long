@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lowhex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:05:38 by diogribe          #+#    #+#             */
-/*   Updated: 2025/02/03 20:18:12 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:38:21 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_reverse(char *str)
 	if (!str || str == NULL)
 		return ;
 	first = 0;
-	last = ft_strlen(str) - 1;
+	last = pf_ft_strlen(str) - 1;
 	while (first < last)
 	{
 		temp = str[first];

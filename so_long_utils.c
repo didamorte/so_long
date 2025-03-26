@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:08:36 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/18 17:30:57 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/26 15:18:22 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ int	is_walkable(t_game game, int y, int x)
 		return (0);
 	if (game.map[y][x] == 'E' && game.collected != 0)
 	{
-		ft_printf("Go back! There are eggs still missing\n"
-				, game.collected);
+		ft_printf("Go back! There are eggs still missing\n",
+			game.collected);
 		return (0);
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:20:24 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/18 17:25:48 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:17:41 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,14 @@ int	map_valid(t_game *game)
 	if (!is_valid_path(*game))
 		return (write(2, "Error\nInvalid path\n", 19));
 	counters(&e_count, &p_count, &c_count, game);
-	if (p_count != 1)
+	if (p_count > 1)
 		return (write(2, "Error\nMore than 1 player\n", 25));
-	if (e_count != 1)
+	if (e_count > 1)
 		return (write(2, "Error\nMore than 1 exit\n", 23));
+	if (p_count < 1)
+		return (write(2, "Error\nNo players found\n", 25));
+	if (e_count < 1)
+		return (write(2, "Error\nNo exits found\n", 23));
 	if (c_count < 1)
 		return (write(2, "Error\nNo collectibles found\n", 28));
 	if (game->valid_walls == 0)

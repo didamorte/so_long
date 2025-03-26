@@ -7,7 +7,7 @@ AR		= ar
 ARFLAGS	= -rc
 RM		= rm -rf
 
-SRCS	= ft_strlen.c \
+SRCS	= pf_ft_strlen.c \
 		pf_ft_putchar_fd.c \
 		pf_ft_putnbr_fd.c \
 		pf_ft_putstr_fd.c \

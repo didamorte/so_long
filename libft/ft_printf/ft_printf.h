@@ -22,7 +22,7 @@
 int		ft_printf(const char *format, ...);
 
 /*Retorna o tamanho da string*/
-size_t	ft_strlen(const char *s);
+size_t	pf_ft_strlen(const char *s);
 
 /*escreve um int*/
 int		pf_ft_putnbr_fd(int nb, int fd);
