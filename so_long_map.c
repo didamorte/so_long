@@ -6,7 +6,7 @@
 /*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:20:24 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/26 17:17:41 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:43:39 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	load_map(char *filename, t_game *game)
 	int	fd;
 	int	y;
 
+	game->map = NULL;
 	game->map_h = get_map_height(filename);
 	if (game->map_h <= 0)
 		return (1);
@@ -37,8 +38,7 @@ int	load_map(char *filename, t_game *game)
 			game->map_w++;
 	}
 	get_next_line(-1);
-	game->map[y] = NULL;
-	return (close(fd));
+	return (game->map[y] = NULL, close(fd));
 }
 
 int	unknown_caracter(t_game game)
@@ -58,12 +58,13 @@ int	unknown_caracter(t_game game)
 			if (game.map[y][x] != 'P' && game.map[y][x] != 'C'
 				&& game.map[y][x] != 'E' && game.map[y][x] != '1'
 				&& game.map[y][x] != '0')
-				return (ft_printf("Error\nInvalid characters\n"), 1);
+				return (write(2, "Error\nInvalid characters\n", 25), 1);
 			x++;
 		}
 		j = ft_strlen(game.map[y]);
-		if (len != j && game.map[y][x] != '\0')
-			return (ft_printf("Error\nMap not rectangular\n"), 1);
+		if ((len != j && game.map[y][x] != '\0') ||
+			game.map_h < 3 || game.map_w < 3)
+			return (write(2, "Error\nMap not rectangular\n", 26), 1);
 		y++;
 	}
 	return (0);
@@ -142,10 +143,8 @@ int	map_valid(t_game *game)
 		return (write(2, "Error\nMore than 1 player\n", 25));
 	if (e_count > 1)
 		return (write(2, "Error\nMore than 1 exit\n", 23));
-	if (p_count < 1)
-		return (write(2, "Error\nNo players found\n", 25));
 	if (e_count < 1)
-		return (write(2, "Error\nNo exits found\n", 23));
+		return (write(2, "Error\nNo exits found\n", 21));
 	if (c_count < 1)
 		return (write(2, "Error\nNo collectibles found\n", 28));
 	if (game->valid_walls == 0)

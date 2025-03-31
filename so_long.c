@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 18:18:00 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/18 17:14:58 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:37:10 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ int	main(int ac, char **av)
 	if (ac != 2 || !is_ber_file(av[1]))
 		return (1);
 	if (load_map(av[1], &game))
-		return (ft_printf("Error\nCan't load map\n"),
+		return (write(2, "Error\nCan't load map\n", 21),
 			free_map(game.map, game.map_h));
 	if (unknown_caracter(game))
 		return (free_map(game.map, game.map_h));
-	find_player_position(&game);
+	if (find_player_position(&game))
+		return (write(2, "Error\nNo players found\n", 23),
+			free_map(game.map, game.map_h));
 	if (map_valid(&game) != 1)
 		return (free_map(game.map, game.map_h));
 	game.mlx = mlx_init();

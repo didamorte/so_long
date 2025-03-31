@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: diogribe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 15:51:12 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/18 16:20:28 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:30:43 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_game
 int		is_walkable(t_game game, int y, int x);
 int		close_game(t_game *game);
 int		free_map(char **map, int height);
-void	find_player_position(t_game *game);
+int		find_player_position(t_game *game);
 int		get_map_height(char *filename);
 
 /* Functions */

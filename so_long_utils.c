@@ -6,7 +6,7 @@
 /*   By: diogribe <diogribe@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 18:08:36 by diogribe          #+#    #+#             */
-/*   Updated: 2025/03/26 15:18:22 by diogribe         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:08:55 by diogribe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	get_map_height(char *filename)
 		return (-1);
 	height = 0;
 	line = get_next_line(fd);
+	if (!line || line[0] != '1')
+		return (free(line), close(fd), get_next_line(-1), -1);
 	while (line)
 	{
 		free(line);
@@ -35,12 +37,14 @@ int	get_map_height(char *filename)
 }
 
 // Find player
-void	find_player_position(t_game *game)
+int	find_player_position(t_game *game)
 {
 	int	x;
 	int	y;
 
 	y = 0;
+	game->pl_x = -1;
+	game->pl_y = -1;
 	while (y < game->map_h)
 	{
 		x = 0;
@@ -55,6 +59,10 @@ void	find_player_position(t_game *game)
 		}
 		y++;
 	}
+	if (game->pl_x == -1 && game->pl_y == -1)
+		return (1);
+	else
+		return (0);
 }
 
 // Free map
@@ -62,7 +70,7 @@ int	free_map(char **map, int height)
 {
 	int	i;
 
-	if (height < 3 || !map)
+	if (!map)
 		return (1);
 	i = -1;
 	while (++i < height)
